@@ -52,3 +52,22 @@ input{
     justify-content: center;
     padding-right: 50px;
 }
+
+.article_list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.article_item{
+    display: grid;
+    grid-template-columns: 400px 120px 100px;
+    font-size: larger;
+}
+
+.ul_home{
+    display: grid;
+    grid-template-columns: 400px;
+    gap: 20px;
+    font-size: larger;
+}

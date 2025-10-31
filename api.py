@@ -89,6 +89,10 @@ def check_login():
     return "something went wrong" #TODO: Return bools here saying if pass or user is correct and then update HTML elements to show user that
 
 
+@app.route("/return")
+def goto_home():
+    return render_template("homepage.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
 
