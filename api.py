@@ -2,9 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, abort
 import json
 import uuid
 import os
+import dotenv
 
 app = Flask(__name__)
 DATA_FILE = "data.json"
+dotenv.load_dotenv()
+
+username = os.getenv("USER")
+password = os.getenv("PASSWORD")
 
 
 def load_data():
@@ -61,6 +66,28 @@ def view_page(page_id):
     if not page:
         abort(404)
     return render_template("page.html", page=page)
+
+@app.route("/login")
+def login():
+    return render_template("admin_login.html")
+
+@app.route("/loginsubmit", methods=["POST"])
+def check_login():
+    posted_user = request.form.get('username_input')
+    posted_password = request.form.get('password_input')
+    print(posted_password)
+    print(password)
+    if posted_user == username:
+        print("pass 1 passed")
+        if posted_password == password:
+            print("pass 2 passed")
+            return render_template("admin_dashboard.html") #TODO: Set up the admin page and ability to add articles so that way the rest of the application can be implemented
+        else:
+            print("password does not match") #TODO: Return user to login page with proper error message saying that password or user does not match
+    else:
+        print("username does not match")
+    return "something went wrong" #TODO: Return bools here saying if pass or user is correct and then update HTML elements to show user that
+
 
 if __name__ == "__main__":
     app.run(debug=True)

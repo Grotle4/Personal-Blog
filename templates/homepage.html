@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Blog</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
     <h1>Personal Blog</h1>
+    <form action="/login">
+        <input type="submit" class="top-right-absolute" value="This is a test" style="width: 100px; height: 30px;">
+    </form>
 </body>
 </html>

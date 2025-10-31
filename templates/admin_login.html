@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
-    
+    <form action="/loginsubmit" method="POST" class="login-grid">
+        <h1>Login</h1>
+        <input type="text" placeholder= "Enter Username" name="username_input" id="username">
+        <input type="password" placeholder="Enter Password" name="password_input" id="password">
+        <input type="submit" value="Login" style="width: 90px; height: 30px";>
+    </form>
 </body>
 </html>
