@@ -93,6 +93,20 @@ def check_login():
 def goto_home():
     return render_template("homepage.html")
 
+@app.route("/article", methods=["POST"])
+def load_article():
+    if request.method == "POST":
+        article_id = request.form.get("item_id")
+        action = request.form["action"]
+        print(article_id)
+        print(action)
+        match action:
+            case "Delete":
+                return f"Deleting article {article_id}" #TODO: Get article id to delete the article once actual article json is setup
+            case "Edit":
+                return render_template("admin_edit_article.html", article_id=article_id) #TODO: Setup article edit page to be able to edit articles once real articles are setup
+        return "This is testing"
+
 if __name__ == "__main__":
     app.run(debug=True)
 
