@@ -15,54 +15,14 @@
         <input type="submit" value="Add Article" style="width: 120px; height: 50px; font-size: large;">
     </form>
     <ul class="article_list">
-        <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 1</li>
-            <input type="hidden" name="item_id" value="1">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-        <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 2</li>
-            <input type="hidden" name="item_id" value="2">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-                <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 3</li>
-            <input type="hidden" name="item_id" value="3">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-        <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 4</li>
-            <input type="hidden" name="item_id" value="4">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-                <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 5</li>
-            <input type="hidden" name="item_id" value="5">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-        <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 6</li>
-            <input type="hidden" name="item_id" value="6">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-                <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 7</li>
-            <input type="hidden" name="item_id" value="7">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
-        <form action="/viewarticle" method="POST" class="article_item">
-            <li>Article 8</li>
-            <input type="hidden" name="item_id" value="8">
-            <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
-            <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
-        </form>
+        {% for item in pages %}
+            <form action="/viewarticle" method="POST" class="article_item"> <!--TODO: Need to add time stamps of when article was created through python-->
+                <li><a href="{{url_for('view_page', page_id=item.id)}}">{{item.title}}</a></li>
+                <input type="hidden" name="item_id" value="{{item.id}}">
+                <input type="submit" value="Edit" name="action" style="width:100px; height: 20px">
+                <input type="submit" value="Delete" name="action" style="width:100px; height: 20px">
+            </form>
+        {% endfor %}
     </ul>
 </body>
 </html>

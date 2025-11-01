@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Article</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
-    <p>This is an article edit for article {{article_id}}</p>
+    <h1>Edit Article</h1>
+    <form action="/returnedit" class="add_article_list" method="POST">
+        <input type="hidden" name="id" value="{{page.id}}">
+        <input type="text" placeholder="Article Name" value="{{page.title}}" name="title" style="text-align: start;" required>
+        <textarea placeholder="Enter Article Text" name="content" rows="20" cols="60" required maxlength="1000"> {{page.content}}</textarea>
+        <input type="submit" value="Submit Article">
+    </form>
+    <form action="/returnadmin" class="top-right-absolute">
+        <input type="submit" value="Back To Home" style="width: 120px; height: 30px;">
+    </form>
 </body>
 </html>

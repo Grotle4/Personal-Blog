@@ -22,23 +22,10 @@ def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
 
-def count_files():
-    try:
-        folder_path = r"C:\Users\light\OneDrive\Documents\Python Projects\Personal Blog\templates\articles"
-        entries = os.listdir(folder_path)
-
-        file_count = sum(1 for entry in entries if os.path.isfile(os.path.join(folder_path, entry))) #TODO: Consider switching to uuid as having a static number could cause problems long term with deleting articles
-        return file_count
-    except FileNotFoundError:
-        print("file not found, returning 1")
-        return 1
-    except Exception as e:
-        print(f"An error has occurred: {e}")
-
-
 @app.route("/")
 def index():
-    return render_template("homepage.html")
+    pages = load_data()
+    return render_template("homepage.html", pages=pages) #TODO: Load JSON data and display article titles on homepage and have it reflect on admin page as well.
 
 @app.route("/add")
 def add_article():
@@ -48,17 +35,13 @@ def add_article():
 def submit():
     title = request.form["title"]
     content = request.form["content"]
-    print(title)
-    print(content) #TODO: Figure out why this returns none
 
     pages = load_data()
     page_id = uuid.uuid1()
-    print(pages)
-    print(page_id)
 
     new_page = {
-        "id": str(page_id),
-        "title": title,
+        "id": str(page_id), #TODO: Add date of publishing automatically to the articles
+        "title": title, #TODO: Clean up JSON file for when articles are complete for proper integration
         "content": content
     }
 
@@ -88,8 +71,8 @@ def check_login():
     if posted_user == username:
         print("pass 1 passed")
         if posted_password == password:
-            print("pass 2 passed")
-            return render_template("admin_dashboard.html") #TODO: Set up the admin page and ability to add articles so that way the rest of the application can be implemented
+            pages = load_data()
+            return render_template("admin_dashboard.html", pages=pages) #TODO: Set up the admin page and ability to add articles so that way the rest of the application can be implemented
         else:
             print("password does not match") #TODO: Return user to login page with proper error message saying that password or user does not match
     else:
@@ -98,7 +81,8 @@ def check_login():
 
 @app.route("/return")
 def goto_home():
-    return render_template("homepage.html")
+    pages = load_data()
+    return render_template("homepage.html", pages=pages)
 
 @app.route("/viewarticle", methods=["POST"])
 def load_article():
@@ -109,14 +93,42 @@ def load_article():
         print(action)
         match action:
             case "Delete":
-                return f"Deleting article {article_id}" #TODO: Get article id to delete the article once actual article json is setup
+                pages = load_data()
+                for idx, page in enumerate(pages):
+                    if page["id"] == article_id:
+                        del pages[idx]
+                save_data(pages)
+                return render_template("admin_dashboard.html", pages=pages) #TODO: Get article id to delete the article once actual article json is setup
             case "Edit":
-                return render_template("admin_edit_article.html", article_id=article_id) #TODO: Setup article edit page to be able to edit articles once real articles are setup
+                pages = load_data()
+                for idx, page in enumerate(pages):
+                    if page["id"] == article_id:
+                        return render_template("admin_edit_article.html", page=page) #TODO: Setup article edit page to be able to edit articles once real articles are setup
         return "This is testing"
     
 @app.route("/returnadmin")
 def return_admin():
     return render_template("admin_dashboard.html")
+
+
+@app.route("/returnedit", methods=["POST"])
+def return_edit():
+    pages = load_data()
+    page_id = request.form.get("id")
+
+    page_title = request.form.get("title")
+    page_content = request.form.get("content")
+    for idx, page in enumerate(pages):
+        print(f"page: {page_id}")
+        print(f"page_id: {page["id"]}")
+        if page["id"] == page_id:
+            print(pages[idx])
+            pages[idx]["title"] = page_title
+            pages[idx]["content"] = page_content
+    save_data(pages)
+    return render_template("admin_dashboard.html", pages=pages)
+
+    
     
 
 if __name__ == "__main__":

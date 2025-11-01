@@ -11,17 +11,10 @@
     <form action="/login">
         <input type="submit" class="top-right-absolute" value="Log In" style="width: 100px; height: 30px;">
     </form>
-    <ul class="ul_home"> <!--TODO: Need to add time stamps of when article was created through python-->
-        <li>Article 1</li>
-        <li>Article 2</li>
-        <li>Article 3</li>
-        <li>Article 4</li>
-        <li>Article 5</li>
-        <li>Article 6</li>
-        <li>Article 7</li>
-        <li>Article 8</li>
-        <li>Article 9</li>
-        <li>Article 10</li>
+    <ul id="article-list" class="ul_home"> <!--TODO: Need to add time stamps of when article was created through python-->
+        {% for item in pages %}
+            <li><a href="{{url_for('view_page', page_id=item.id)}}">{{item.title}}</a></li>
+        {% endfor %}
     </ul>
 </body>
 </html>
