@@ -27,7 +27,7 @@ def count_files():
         folder_path = r"C:\Users\light\OneDrive\Documents\Python Projects\Personal Blog\templates\articles"
         entries = os.listdir(folder_path)
 
-        file_count = sum(1 for entry in entries if os.path.isfile(os.path.join(folder_path, entry)))
+        file_count = sum(1 for entry in entries if os.path.isfile(os.path.join(folder_path, entry))) #TODO: Consider switching to uuid as having a static number could cause problems long term with deleting articles
         return file_count
     except FileNotFoundError:
         print("file not found, returning 1")
@@ -48,12 +48,16 @@ def add_article():
 def submit():
     title = request.form["title"]
     content = request.form["content"]
+    print(title)
+    print(content) #TODO: Figure out why this returns none
 
     pages = load_data()
-    page_id = count_files()
+    page_id = uuid.uuid1()
+    print(pages)
+    print(page_id)
 
     new_page = {
-        "id": page_id,
+        "id": str(page_id),
         "title": title,
         "content": content
     }
@@ -61,7 +65,7 @@ def submit():
     pages.append(new_page)
     save_data(pages)
 
-    return redirect(url_for("article", page_id=page_id))
+    return redirect(url_for("view_page", page_id=page_id))
 
 @app.route("/article/<string:page_id>")
 def view_page(page_id):
@@ -69,7 +73,7 @@ def view_page(page_id):
     page = next((p for p in pages if p["id"] == page_id), None)
     if not page:
         abort(404)
-    return render_template("page.html", page=page)
+    return render_template("articlepage.html", page=page)
 
 @app.route("/login")
 def login():
@@ -91,7 +95,6 @@ def check_login():
     else:
         print("username does not match")
     return "something went wrong" #TODO: Return bools here saying if pass or user is correct and then update HTML elements to show user that
-
 
 @app.route("/return")
 def goto_home():

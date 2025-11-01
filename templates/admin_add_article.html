@@ -8,9 +8,9 @@
 </head>
 <body>
     <h1>Add An Article</h1>
-    <form action="/article_submit" class="add_article_list">
-        <input type="text" placeholder="Article Name" style="text-align: start;">
-        <textarea name="article_desc" id="article_desc" rows="20" cols="60" required maxlength="325"></textarea>
+    <form action="/submit" class="add_article_list" method="POST">
+        <input type="text" placeholder="Article Name" name="title" style="text-align: start;" required>
+        <textarea placeholder="Enter Article Text" name="content" rows="20" cols="60" required maxlength="1000"></textarea>
         <input type="submit" value="Submit Article">
     </form>
     <form action="/returnadmin" class="top-right-absolute">
