@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Article</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <h1>Add An Article</h1>
+    <form action="/article_submit" class="add_article_list">
+        <input type="text" placeholder="Article Name" style="text-align: start;">
+        <textarea name="article_desc" id="article_desc" rows="20" cols="60" required maxlength="325"></textarea>
+        <input type="submit" value="Submit Article">
+    </form>
+    <form action="/returnadmin" class="top-right-absolute">
+        <input type="submit" value="Back To Home" style="width: 120px; height: 30px;">
+    </form>
+</body>
+</html>

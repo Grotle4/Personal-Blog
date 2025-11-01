@@ -40,6 +40,10 @@ def count_files():
 def index():
     return render_template("homepage.html")
 
+@app.route("/add")
+def add_article():
+    return render_template("admin_add_article.html")
+
 @app.route("/submit", methods=["POST"])
 def submit():
     title = request.form["title"]
@@ -93,7 +97,7 @@ def check_login():
 def goto_home():
     return render_template("homepage.html")
 
-@app.route("/article", methods=["POST"])
+@app.route("/viewarticle", methods=["POST"])
 def load_article():
     if request.method == "POST":
         article_id = request.form.get("item_id")
@@ -106,6 +110,11 @@ def load_article():
             case "Edit":
                 return render_template("admin_edit_article.html", article_id=article_id) #TODO: Setup article edit page to be able to edit articles once real articles are setup
         return "This is testing"
+    
+@app.route("/returnadmin")
+def return_admin():
+    return render_template("admin_dashboard.html")
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
