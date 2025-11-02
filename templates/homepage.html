@@ -13,7 +13,10 @@
     </form>
     <ul id="article-list" class="ul_home"> <!--TODO: Need to add time stamps of when article was created through python-->
         {% for item in pages %}
-            <li><a href="{{url_for('view_page', page_id=item.id)}}">{{item.title}}</a></li>
+            <li>
+                <a href="{{url_for('view_page', page_id=item.id)}}">{{item.title}}</a>
+                <span class="date">{{item.date}}</span>
+            </li>
         {% endfor %}
     </ul>
 </body>

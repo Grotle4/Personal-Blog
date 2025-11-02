@@ -3,6 +3,8 @@ import json
 import uuid
 import os
 import dotenv
+import time
+import datetime
 
 app = Flask(__name__)
 DATA_FILE = "data.json"
@@ -33,16 +35,20 @@ def add_article():
 
 @app.route("/submit", methods=["POST"])
 def submit():
+    this_time = time.time()
+    timestamp = datetime.datetime.fromtimestamp(this_time).strftime("%m-%d-%Y")
     title = request.form["title"]
     content = request.form["content"]
+    date = timestamp
 
     pages = load_data()
     page_id = uuid.uuid1()
 
     new_page = {
-        "id": str(page_id), #TODO: Add date of publishing automatically to the articles
-        "title": title, #TODO: Clean up JSON file for when articles are complete for proper integration
-        "content": content
+        "id": str(page_id),
+        "title": title,
+        "content": content,
+        "date": str(date)
     }
 
     pages.append(new_page)
@@ -128,8 +134,6 @@ def return_edit():
     save_data(pages)
     return render_template("admin_dashboard.html", pages=pages)
 
-    
-    
 
 if __name__ == "__main__":
     app.run(debug=True)
