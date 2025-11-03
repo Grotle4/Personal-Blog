@@ -40,7 +40,7 @@ All blog entries are saved to a local `data.json` file, making this an ideal pro
 ---
 
 ## 🏗 Project Structure
-
+```
 Personal Blog/
 ├── api.py # Main Flask application
 ├── data.json # JSON file storing blog posts
@@ -52,21 +52,18 @@ Personal Blog/
 ├── .env # Admin credentials
 ├── .gitignore
 └── README.md
-
-yaml
-Copy code
-
+```
 ---
 
 ## ⚙️ Installation
 
 ### 1. Clone the repository
-```bash
+```
 git clone https://github.com/Grotle4/Personal-Blog.git
 cd Personal-Blog
 ```
 ### 2. Create a virtual environment
-```bash
+```
 python -m venv venv
 ```
 ```
@@ -79,22 +76,21 @@ venv\Scripts\activate     # On Windows
 
 
 ### 3. Install dependencies
-````bash
+```
 pip install flask python-dotenv
-````
+```
 
 ### 🔧 Configuration
 Create a .env file in the project root (if not already present):
 ```
 USER=your_username
-PASSWORD=
+PASSWORD=your_password
 ```
 This file defines the simple admin credentials used when adding posts.
 
 🚀 Usage
 Run the Flask app:
 ```
-bash
 python api.py
 ```
 Open your browser and visit:
