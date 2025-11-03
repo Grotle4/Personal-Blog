@@ -116,4 +116,7 @@ Blank homepage	data.json missing or empty	Create an empty data.json ([])
 Login not working	Incorrect .env values	Verify USER and PASSWORD entries
 
 👥 Contributors
-Grotle4 – Creator and maintainer
+Dylan Troche – Creator and maintainer
+
+---
+Inspiration: https://roadmap.sh/projects/personal-blog
