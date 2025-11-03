@@ -48,7 +48,7 @@ Personal Blog/
 │ ├── homepage.html
 │ ├── admin_add_article.html
 │ └── article.html
-├── static/ # CSS, JS, and images
+├── static/ # CSS
 ├── .env # Admin credentials
 ├── .gitignore
 └── README.md
