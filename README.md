@@ -67,7 +67,6 @@ cd Personal-Blog
 ```
 ### 2. Create a virtual environment
 ```bash
-Copy code
 python -m venv venv
 ```
 ```
@@ -80,15 +79,13 @@ venv\Scripts\activate     # On Windows
 
 
 ### 3. Install dependencies
-```bash
-Copy code
+````bash
 pip install flask python-dotenv
-```
+````
 
 ### 🔧 Configuration
 Create a .env file in the project root (if not already present):
 ```
-.env
 USER=your_username
 PASSWORD=
 ```
