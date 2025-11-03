@@ -16,6 +16,14 @@ h1{
     margin-left: 30px
 }
 
+h2{
+    margin-left: 32px;
+    font-size: 20px;
+    color: #a7a6a6;
+    position: relative;
+    top: -20px;
+}
+
 input[type="submit"]{
     border-radius: 10px;
     background-color: rgb(145, 145, 145);
@@ -25,7 +33,18 @@ input[type="submit"]{
     border-radius: 10px;
     font-weight: lighter;
     color: white;
+    transition: background-color 0.3s ease-in;
 }
+
+input[type="submit"]:hover{
+    background-color: rgb(99, 98, 98);
+}
+
+input[type="submit"]:active{
+    background-color: #3e3e3e;
+    transition: none;
+}
+
 
 .top-right-absolute{
     position: absolute;

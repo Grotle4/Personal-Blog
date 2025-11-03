@@ -1,20 +1,14 @@
 [
   {
-    "id": "6a781add-b777-11f0-9aae-b03cdc4af01b",
-    "title": "Testing Time",
-    "content": " Its time to game",
-    "date": "2025-11-01"
-  },
-  {
     "id": "2d738cd6-b780-11f0-b480-b03cdc4af01b",
-    "title": "Test two",
-    "content": "Its time to lock in",
+    "title": "Article Example",
+    "content": "This is just a showcase to show how articles are formatted on the blog.",
     "date": "11-01-2025"
   },
   {
     "id": "62cd9189-b784-11f0-94bd-b03cdc4af01b",
-    "title": "Testing this",
-    "content": "Nice 1",
+    "title": "Heres a second article to show off",
+    "content": "A second article",
     "date": "11-01-2025"
   }
 ]

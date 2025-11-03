@@ -27,7 +27,7 @@ def save_data(data):
 @app.route("/")
 def index():
     pages = load_data()
-    return render_template("homepage.html", pages=pages) #TODO: Load JSON data and display article titles on homepage and have it reflect on admin page as well.
+    return render_template("homepage.html", pages=pages)
 
 @app.route("/add")
 def add_article():
@@ -87,7 +87,7 @@ def check_login():
         if posted_password == password:
             pages = load_data()
             password_error_style = "visibility: hidden;"
-            return render_template("admin_dashboard.html", pages=pages) #TODO: Set up the admin page and ability to add articles so that way the rest of the application can be implemented
+            return render_template("admin_dashboard.html", pages=pages)
         else:           
             password_error_style = "visibility: visible;"
     else:
@@ -118,12 +118,12 @@ def load_article():
                     if page["id"] == article_id:
                         del pages[idx]
                 save_data(pages)
-                return render_template("admin_dashboard.html", pages=pages) #TODO: Get article id to delete the article once actual article json is setup
+                return render_template("admin_dashboard.html", pages=pages)
             case "Edit":
                 pages = load_data()
                 for idx, page in enumerate(pages):
                     if page["id"] == article_id:
-                        return render_template("admin_edit_article.html", page=page) #TODO: Setup article edit page to be able to edit articles once real articles are setup
+                        return render_template("admin_edit_article.html", page=page)
         return "This is testing"
     
 @app.route("/returnadmin")
