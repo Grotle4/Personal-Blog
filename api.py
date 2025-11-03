@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, url_for, abort, jsonify
 import json
 import uuid
 import os
@@ -66,7 +66,13 @@ def view_page(page_id):
 
 @app.route("/login")
 def login():
-    return render_template("admin_login.html")
+    username_error_style = "visibility: hidden;"
+    password_error_style = "visibility: visible;"
+    return render_template("admin_login.html",
+                            username_error_style="visibility: hidden;",
+                            password_error_style="visibility: hidden;",
+                            entered_username= "",
+                            entered_password= "")
 
 @app.route("/loginsubmit", methods=["POST"])
 def check_login():
@@ -74,16 +80,24 @@ def check_login():
     posted_password = request.form.get('password_input')
     print(posted_password)
     print(password)
+    username_error_style = "visibility: hidden;"
+    password_error_style = "visibility: visible;"
     if posted_user == username:
         print("pass 1 passed")
         if posted_password == password:
             pages = load_data()
+            password_error_style = "visibility: hidden;"
             return render_template("admin_dashboard.html", pages=pages) #TODO: Set up the admin page and ability to add articles so that way the rest of the application can be implemented
-        else:
-            print("password does not match") #TODO: Return user to login page with proper error message saying that password or user does not match
+        else:           
+            password_error_style = "visibility: visible;"
     else:
-        print("username does not match")
-    return "something went wrong" #TODO: Return bools here saying if pass or user is correct and then update HTML elements to show user that
+        username_error_style = "visibility: visible;"
+    return render_template("admin_login.html", 
+                            username_error_style=username_error_style, 
+                            password_error_style=password_error_style,
+                            entered_username= posted_user,
+                            entered_password= posted_password)
+
 
 @app.route("/return")
 def goto_home():

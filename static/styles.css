@@ -44,14 +44,30 @@ input{
     font-weight: bold;
 }
 
-.login-grid{
-    display: flex;
-    padding-top: 200px;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    justify-content: center;
-    padding-right: 50px;
+.login-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers everything horizontally */
+  gap: 10px; /* space between rows */
+}
+
+.login_row {
+  display: flex;
+  flex-direction: column; /* stack input and p vertically */
+  align-items: center;    /* center them horizontally within this div */
+}
+
+.login_row input {
+  width: 200px; /* or whatever width you want */
+  padding: 5px;
+}
+
+.login_row p {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+  margin-left: 15px;
+  text-align: center;
 }
 
 .article_list{
